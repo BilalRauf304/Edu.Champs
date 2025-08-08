@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard — Online Courses</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.4/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --sidebar-width: 260px;
+      }
+      body {
+        background: #f8f9fa;
+      }
+      .sidebar {
+        width: var(--sidebar-width);
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding-top: 1rem;
+        background: #fff;
+        border-right: 1px solid #e9ecef;
+      }
+      .sidebar .nav-link {
+        color: #495057;
+      }
+      .sidebar .nav-link.active {
+        background: #e7f1ff;
+        border-radius: 0.5rem;
+        color: #0d6efd;
+      }
+      main {
+        margin-left: var(--sidebar-width);
+        padding: 1.5rem;
+      }
+      .card-small {
+        min-height: 90px;
+      }
+      @media (max-width: 991px) {
+        .sidebar {
+          position: relative;
+          width: 100%;
+          height: auto;
+          border-right: none;
+        }
+        main {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside class="sidebar d-flex flex-column p-3">
+      <a href="#" class="d-flex align-items-center mb-3 text-decoration-none">
+        <i class="bi bi-journal-bookmark-fill fs-3 text-primary"></i>
+        <span class="fs-4 ms-2">Edu.CHAMPS Admin</span>
+      </a>
+      <hr />
+      <ul class="nav nav-pills flex-column mb-auto" id="navLinks">
+        <li class="nav-item">
+          <a class="nav-link active" href="#dashboard" data-bs-toggle="tab"
+            ><i class="bi bi-speedometer2 me-2"></i>Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#courses" data-bs-toggle="tab"
+            ><i class="bi bi-book me-2"></i>Courses</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#students" data-bs-toggle="tab"
+            ><i class="bi bi-people me-2"></i>Students</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#instructors" data-bs-toggle="tab"
+            ><i class="bi bi-person-badge me-2"></i>Instructors</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#settings" data-bs-toggle="tab"
+            ><i class="bi bi-gear me-2"></i>Settings</a
+          >
+        </li>
+      </ul>
+      <hr />
+      <div class="mt-auto">
+        <small class="text-muted">Logged in as <strong>Admin</strong></small>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main>
+      <!-- Topbar -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="m-0">Admin Dashboard</h3>
+        <div class="d-flex align-items-center gap-3">
+          <div class="input-group d-none d-md-flex" style="max-width: 320px">
+            <input
+              id="globalSearch"
+              class="form-control"
+              placeholder="Search courses, students..."
+            />
+            <button
+              class="btn btn-outline-secondary"
+              id="clearSearch"
+              title="Clear"
+            >
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+          <button
+            class="btn btn-outline-secondary"
+            id="btnAddCourseMobile"
+            data-bs-toggle="modal"
+            data-bs-target="#courseModal"
+          >
+            <i class="bi bi-plus"></i> Add
+          </button>
+          <div class="dropdown">
+            <a
+              class="btn btn-primary dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              >Admin</a
+            >
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="#settings" data-bs-toggle="tab"
+                  >Settings</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="#" id="logoutBtn">Log out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="tab-content">
+        <!-- Dashboard -->
+        <div class="tab-pane fade show active" id="dashboard">
+          <div class="row g-3 mb-3">
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card p-3 card-small">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-0">Total Courses</h6>
+                    <h3 id="statCourses">0</h3>
+                  </div>
+                  <i class="bi bi-book fs-1 text-primary"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card p-3 card-small">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-0">Total Students</h6>
+                    <h3 id="statStudents">0</h3>
+                  </div>
+                  <i class="bi bi-people fs-1 text-success"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card p-3 card-small">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-0">Active Enrollments</h6>
+                    <h3 id="statEnroll">0</h3>
+                  </div>
+                  <i class="bi bi-journal-check fs-1 text-warning"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-12 col-md-6 col-lg-3">
+              <div class="card p-3 card-small">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-0">Revenue (est.)</h6>
+                    <h3 id="statRevenue">$0</h3>
+                  </div>
+                  <i class="bi bi-currency-dollar fs-1 text-info"></i>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Recent Courses</h5>
+              <div class="table-responsive">
+                <table class="table table-hover" id="recentCoursesTable">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th>Students</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Courses -->
+        <div class="tab-pane fade" id="courses">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="m-0">Courses</h4>
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-secondary d-md-none"
+                id="toggleFilters"
+              >
+                Filters
+              </button>
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#courseModal"
+              >
+                + Add Course
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="mb-3 d-flex gap-2 flex-column flex-md-row">
+                <input
+                  id="courseSearch"
+                  class="form-control"
+                  placeholder="Search courses by title or category"
+                />
+                <select
+                  id="filterCategory"
+                  class="form-select"
+                  style="max-width: 220px"
+                >
+                  <option value="">All categories</option>
+                </select>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-striped" id="coursesTable">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th>Level</th>
+                      <th>Students</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Students -->
+        <div class="tab-pane fade" id="students">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="m-0">Students</h4>
+            <div>
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#studentModal"
+              >
+                + Add Student
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="mb-3">
+                <input
+                  id="studentSearch"
+                  class="form-control"
+                  placeholder="Search students by name or email"
+                />
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hover" id="studentsTable">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Courses</th>
+                      <th>Joined</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructors (simple list) -->
+        <div class="tab-pane fade" id="instructors">
+          <div class="card">
+            <div class="card-body">
+              <h4>Instructors</h4>
+              <p class="text-muted">
+                This demo keeps instructors minimal. You can extend CRUD
+                similarly to courses/students.
+              </p>
+              <ul id="instructorList" class="list-group"></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings -->
+        <div class="tab-pane fade" id="settings">
+          <div class="card">
+            <div class="card-body">
+              <h4>Settings</h4>
+              <div class="mb-3">
+                <label class="form-label">Site name</label>
+                <input
+                  id="settingSiteName"
+                  class="form-control"
+                  placeholder="EduAdmin"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Currency</label>
+                <input
+                  id="settingCurrency"
+                  class="form-control"
+                  placeholder="$"
+                />
+              </div>
+              <button class="btn btn-primary" id="saveSettings">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal fade" id="courseModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <form id="courseForm">
+            <div class="modal-header">
+              <h5 class="modal-title">Add / Edit Course</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="courseId" />
+              <div class="row g-3">
+                <div class="col-md-8">
+                  <label class="form-label">Title</label>
+                  <input id="courseTitle" class="form-control" required />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Category</label>
+                  <input id="courseCategory" class="form-control" required />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Level</label>
+                  <select id="courseLevel" class="form-select">
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Price</label>
+                  <input
+                    id="coursePrice"
+                    type="number"
+                    class="form-control"
+                    min="0"
+                    value="0"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Students</label>
+                  <input
+                    id="courseStudents"
+                    type="number"
+                    class="form-control"
+                    min="0"
+                    value="0"
+                  />
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Short description</label>
+                  <textarea
+                    id="courseDesc"
+                    class="form-control"
+                    rows="3"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary">Save Course</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="studentModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="studentForm">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Student</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="studentId" />
+              <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input id="studentName" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input
+                  id="studentEmail"
+                  type="email"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"
+                  >Enrolled courses (comma separated IDs)</label
+                >
+                <input
+                  id="studentCourses"
+                  class="form-control"
+                  placeholder="1,2"
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Save Student
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Simple demo admin dashboard logic using localStorage.
+      // Data schema: courses = [{id,title,category,level,price,students,desc}], students = [{id,name,email,courses:[] ,joined}]
+
+      const LS_KEY = "eduadmin_demo_v1";
+
+      let state = {
+        courses: [],
+        students: [],
+        instructors: [],
+        settings: { siteName: "EduAdmin", currency: "$" },
+      };
+
+      // --- Utilities ---
+      function saveState() {
+        localStorage.setItem(LS_KEY, JSON.stringify(state));
+      }
+      function loadState() {
+        const raw = localStorage.getItem(LS_KEY);
+        if (raw) {
+          try {
+            state = JSON.parse(raw);
+          } catch (e) {
+            console.error(e);
+          }
+        }
+      }
+      function uid(prefix = "id") {
+        return prefix + "-" + Math.random().toString(36).slice(2, 9);
+      }
+
+      // --- Renderers ---
+      function renderStats() {
+        document.getElementById("statCourses").innerText = state.courses.length;
+        document.getElementById("statStudents").innerText =
+          state.students.length;
+        const enrollCount = state.students.reduce(
+          (s, st) => s + (st.courses ? st.courses.length : 0),
+          0
+        );
+        document.getElementById("statEnroll").innerText = enrollCount;
+        const revenue = state.courses.reduce(
+          (s, c) => s + (c.price || 0) * (c.students || 0),
+          0
+        );
+        document.getElementById("statRevenue").innerText =
+          (state.settings.currency || "$") + revenue;
+      }
+
+      function renderRecentCourses() {
+        const tbody = document.querySelector("#recentCoursesTable tbody");
+        tbody.innerHTML = "";
+        state.courses
+          .slice(-5)
+          .reverse()
+          .forEach((c) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `<td>${c.title}</td><td>${c.category}</td><td>${
+              c.students || 0
+            }</td><td>${state.settings.currency || "$"}${
+              c.price || 0
+            }</td><td><button class="btn btn-sm btn-outline-primary" onclick="openEditCourse('${
+              c.id
+            }')">Edit</button></td>`;
+            tbody.appendChild(tr);
+          });
+      }
+
+      function buildCategoryFilter() {
+        const sel = document.getElementById("filterCategory");
+        const cats = Array.from(
+          new Set(state.courses.map((c) => c.category).filter(Boolean))
+        );
+        sel.innerHTML =
+          '<option value="">All categories</option>' +
+          cats.map((x) => `<option value="${x}">${x}</option>`).join("");
+      }
+
+      function renderCoursesTable(filterText = "") {
+        const tbody = document.querySelector("#coursesTable tbody");
+        tbody.innerHTML = "";
+        const catFilter = document.getElementById("filterCategory").value;
+        const text = filterText.toLowerCase();
+        state.courses.forEach((c) => {
+          if (catFilter && c.category !== catFilter) return;
+          if (text) {
+            const hay = (
+              c.title +
+              " " +
+              c.category +
+              " " +
+              (c.desc || "")
+            ).toLowerCase();
+            if (!hay.includes(text)) return;
+          }
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${c.title}</td><td>${c.category}</td><td>${
+            c.level
+          }</td><td>${c.students || 0}</td><td>${
+            state.settings.currency || "$"
+          }${c.price || 0}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-secondary me-1" onclick="openEditCourse('${
+              c.id
+            }')"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-sm btn-outline-danger" onclick="deleteCourse('${
+              c.id
+            }')"><i class="bi bi-trash"></i></button>
+          </td>`;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function renderStudentsTable(filterText = "") {
+        const tbody = document.querySelector("#studentsTable tbody");
+        tbody.innerHTML = "";
+        const text = filterText.toLowerCase();
+        state.students.forEach((s) => {
+          const hay = (s.name + " " + s.email).toLowerCase();
+          if (text && !hay.includes(text)) return;
+          const courseTitles = (s.courses || [])
+            .map(
+              (cid) =>
+                (state.courses.find((c) => c.id === cid) || {}).title || cid
+            )
+            .join(", ");
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${s.name}</td><td>${
+            s.email
+          }</td><td>${courseTitles}</td><td>${new Date(
+            s.joined
+          ).toLocaleDateString()}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-secondary me-1" onclick="openEditStudent('${
+              s.id
+            }')"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-sm btn-outline-danger" onclick="deleteStudent('${
+              s.id
+            }')"><i class="bi bi-trash"></i></button>
+          </td>`;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function renderInstructors() {
+        const ul = document.getElementById("instructorList");
+        ul.innerHTML = "";
+        (state.instructors || []).forEach((i) => {
+          const li = document.createElement("li");
+          li.className = "list-group-item";
+          li.innerText = i.name + " — " + (i.email || "");
+          ul.appendChild(li);
+        });
+      }
+
+      // --- CRUD ---
+      function addOrUpdateCourse(payload) {
+        if (payload.id) {
+          const idx = state.courses.findIndex((c) => c.id === payload.id);
+          if (idx > -1) {
+            state.courses[idx] = payload;
+          }
+        } else {
+          payload.id = uid("course");
+          state.courses.push(payload);
+        }
+        saveState();
+        refreshAll();
+      }
+      function deleteCourse(id) {
+        if (!confirm("Delete this course?")) return;
+        state.courses = state.courses.filter((c) => c.id !== id);
+        saveState();
+        refreshAll();
+      }
+      function openEditCourse(id) {
+        const c = state.courses.find((x) => x.id === id);
+        if (!c) return;
+        document.getElementById("courseId").value = c.id;
+        document.getElementById("courseTitle").value = c.title;
+        document.getElementById("courseCategory").value = c.category;
+        document.getElementById("courseLevel").value = c.level;
+        document.getElementById("coursePrice").value = c.price;
+        document.getElementById("courseStudents").value = c.students;
+        document.getElementById("courseDesc").value = c.desc;
+        const modal = new bootstrap.Modal(
+          document.getElementById("courseModal")
+        );
+        modal.show();
+      }
+
+      function addOrUpdateStudent(payload) {
+        if (payload.id) {
+          const idx = state.students.findIndex((s) => s.id === payload.id);
+          if (idx > -1) state.students[idx] = payload;
+        } else {
+          payload.id = uid("stu");
+          payload.joined = new Date().toISOString();
+          state.students.push(payload);
+        }
+        saveState();
+        refreshAll();
+      }
+      function deleteStudent(id) {
+        if (!confirm("Delete this student?")) return;
+        state.students = state.students.filter((s) => s.id !== id);
+        saveState();
+        refreshAll();
+      }
+      function openEditStudent(id) {
+        const s = state.students.find((x) => x.id === id);
+        if (!s) return;
+        document.getElementById("studentId").value = s.id;
+        document.getElementById("studentName").value = s.name;
+        document.getElementById("studentEmail").value = s.email;
+        document.getElementById("studentCourses").value = (
+          s.courses || []
+        ).join(",");
+        const modal = new bootstrap.Modal(
+          document.getElementById("studentModal")
+        );
+        modal.show();
+      }
+
+      // --- Events ---
+      document
+        .getElementById("courseForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const c = {
+            id: document.getElementById("courseId").value || null,
+            title: document.getElementById("courseTitle").value.trim(),
+            category: document.getElementById("courseCategory").value.trim(),
+            level: document.getElementById("courseLevel").value,
+            price: Number(document.getElementById("coursePrice").value) || 0,
+            students:
+              Number(document.getElementById("courseStudents").value) || 0,
+            desc: document.getElementById("courseDesc").value.trim(),
+          };
+          addOrUpdateCourse(c);
+          bootstrap.Modal.getInstance(
+            document.getElementById("courseModal")
+          ).hide();
+          this.reset();
+        });
+
+      document
+        .getElementById("studentForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const s = {
+            id: document.getElementById("studentId").value || null,
+            name: document.getElementById("studentName").value.trim(),
+            email: document.getElementById("studentEmail").value.trim(),
+            courses: (document.getElementById("studentCourses").value || "")
+              .split(",")
+              .map((x) => x.trim())
+              .filter(Boolean),
+          };
+          addOrUpdateStudent(s);
+          bootstrap.Modal.getInstance(
+            document.getElementById("studentModal")
+          ).hide();
+          this.reset();
+        });
+
+      document
+        .getElementById("filterCategory")
+        .addEventListener("change", () =>
+          renderCoursesTable(document.getElementById("courseSearch").value)
+        );
+      document
+        .getElementById("courseSearch")
+        .addEventListener("input", (e) => renderCoursesTable(e.target.value));
+      document
+        .getElementById("studentSearch")
+        .addEventListener("input", (e) => renderStudentsTable(e.target.value));
+
+      document.getElementById("globalSearch").addEventListener("input", (e) => {
+        const q = e.target.value;
+        renderCoursesTable(q);
+        renderStudentsTable(q);
+      });
+      document.getElementById("clearSearch").addEventListener("click", () => {
+        document.getElementById("globalSearch").value = "";
+        renderCoursesTable();
+        renderStudentsTable();
+      });
+
+      document.getElementById("saveSettings").addEventListener("click", () => {
+        state.settings.siteName =
+          document.getElementById("settingSiteName").value ||
+          state.settings.siteName;
+        state.settings.currency =
+          document.getElementById("settingCurrency").value ||
+          state.settings.currency;
+        saveState();
+        refreshAll();
+        alert("Settings saved");
+      });
+
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        alert("Demo logout — no real session here.");
+      });
+
+      // --- Initial demo seed data (only first run) ---
+      function seedDemo() {
+        if (localStorage.getItem(LS_KEY)) return;
+        state.courses = [
+          {
+            id: "c-1",
+            title: "Quran Recitation Basics",
+            category: "Islamic",
+            level: "Beginner",
+            price: 10,
+            students: 120,
+            desc: "Start reading Quran with tajweed basics.",
+          },
+          {
+            id: "c-2",
+            title: "Web Development 101",
+            category: "Technology",
+            level: "Beginner",
+            price: 49,
+            students: 85,
+            desc: "HTML, CSS and JavaScript fundamentals.",
+          },
+          {
+            id: "c-3",
+            title: "Business Fundamentals",
+            category: "Business",
+            level: "Intermediate",
+            price: 79,
+            students: 40,
+            desc: "Intro to business and entrepreneurship.",
+          },
+        ];
+        state.students = [
+          {
+            id: "s-1",
+            name: "Aisha Khan",
+            email: "aisha@example.com",
+            courses: ["c-1", "c-2"],
+            joined: new Date().toISOString(),
+          },
+          {
+            id: "s-2",
+            name: "Omar Ali",
+            email: "omar@example.com",
+            courses: ["c-2"],
+            joined: new Date().toISOString(),
+          },
+        ];
+        state.instructors = [{ name: "Dr. Farooq", email: "farooq@edu.com" }];
+        saveState();
+      }
+
+      function refreshAll() {
+        buildCategoryFilter();
+        renderStats();
+        renderRecentCourses();
+        renderCoursesTable();
+        renderStudentsTable();
+        renderInstructors(); // sync settings to UI
+        document.getElementById("settingSiteName").value =
+          state.settings.siteName || "EduAdmin";
+        document.getElementById("settingCurrency").value =
+          state.settings.currency || "$";
+      }
+
+      // --- Boot ---
+      (function () {
+        loadState();
+        seedDemo();
+        refreshAll();
+      })();
+
+      // Expose some functions globally so buttons inside table can call them
+      window.openEditCourse = openEditCourse;
+      window.deleteCourse = deleteCourse;
+      window.openEditStudent = openEditStudent;
+      window.deleteStudent = deleteStudent;
+    </script>
+  </body>
+</html>

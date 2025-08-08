@@ -111,6 +111,30 @@
     //   });
     // }
 
+    // Example: Chart.js for dashboard graph
+const ctx = document.getElementById('myChart').getContext('2d');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+            label: 'Sales ($)',
+            data: [1200, 1900, 3000, 5000, 2300, 3200],
+            borderColor: 'blue',
+            backgroundColor: 'rgba(0, 123, 255, 0.3)',
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true
+    }
+});
+
+// Example: Dynamically update user count
+document.getElementById('usersCount').textContent = 150;
+
+
 })(jQuery);
 
 
