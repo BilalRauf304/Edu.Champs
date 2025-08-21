@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard — Online Courses</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.4/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --sidebar-width: 260px;
+      }
+      body {
+        background: #f8f9fa;
+      }
+      .sidebar {
+        width: var(--sidebar-width);
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding-top: 1rem;
+        background: #fff;
+        border-right: 1px solid #e9ecef;
+      }
+      .sidebar .nav-link {
+        color: #495057;
+      }
+      .sidebar .nav-link.active {
+        background: #e7f1ff;
+        border-radius: 0.5rem;
+        color: #0d6efd;
+      }
+      main {
+        margin-left: var(--sidebar-width);
+        padding: 1.5rem;
+      }
+      .card-small {
+        min-height: 90px;
+      }
+      @media (max-width: 991px) {
+        .sidebar {
+          position: relative;
+          width: 100%;
+          height: auto;
+          border-right: none;
+        }
+        main {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside class="sidebar d-flex flex-column p-3">
+      <a href="#" class="d-flex align-items-center mb-3 text-decoration-none">
+        <i class="bi bi-journal-bookmark-fill fs-3 text-primary"></i>
+        <span class="fs-4 ms-2">Edu.CHAMPS Admin</span>
+      </a>
+      <hr />
+      <ul class="nav nav-pills flex-column mb-auto" id="navLinks">
+        <li class="nav-item">
+          <a class="nav-link " href="admin.html"
+            ><i class="bi bi-speedometer2 me-2"></i>Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="adminstudents.html" 
+            ><i class="bi bi-people me-2"></i>Students</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="teacher.html"
+            ><i class="bi bi-person-badge me-2"></i>Instructors</a>         
+        </li>
+       
+      </ul>
+      <hr />
+      <div class="mt-auto">
+        <small class="text-muted">Logged in as <strong>Admin</strong></small>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main>
+      <!-- Topbar -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="m-0">Admin Dashboard</h3>
+        <div class="d-flex align-items-center gap-3">
+          <div class="input-group d-none d-md-flex" style="max-width: 320px">
+            <input
+              id="globalSearch"
+              class="form-control"
+              placeholder="Search Students..."
+            />
+            <button
+              class="btn btn-outline-secondary"
+              id="clearSearch"
+              title="Clear"
+            >
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+          <!-- <button
+            class="btn btn-outline-secondary"
+            id="btnAddCourseMobile"
+            data-bs-toggle="modal"
+            data-bs-target="#courseModal"
+          >
+            <i class="bi bi-plus"></i> Add
+          </button> -->
+          <div class="dropdown">
+            <a
+              class="btn btn-primary dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              >Admin</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="#" id="logoutBtn">Log out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content -->
+     
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Students </h5>
+              <div class="table-responsive">
+               <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Address</th>
+        <th>Course</th>
+        <th>Addinotal Notes</th>
+      </tr>
+    </thead>
+    <tbody id="dataTable">
+              </div>
+            </div>
+          </div>
+        </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    async function loadData() {
+      try {
+        
+        let res = await fetch("https://jsonplaceholder.typicode.com/posts");
+        let data = await res.json();
+        console.log(data)
+
+        let tableBody = document.getElementById("dataTable");
+        tableBody.innerHTML = ""; 
+
+        // Sirf 7 rows dikhani hain
+        data.slice().forEach(item => {
+          let row = `
+            <tr>
+              <td>${item.id}</td>
+              <td>${item.name}</td>
+              <td>${item.email}</td>
+              <td>${item.contact}</td>
+              <td>${item.address}</td>
+              <td>${item.course}</td>
+              <td>${item.addinotalnotes}</td>
+              <td>
+                <button  class=" border-0 " onclick="deleteRow(${item.id})"><i class="bi bi-x  "></i></button>
+                <button class=" border-0 " onclick="createRow()"><i class="bi bi-pencil-fill"></i></button>
+              </td>
+            </tr>
+          `;
+          tableBody.innerHTML += row;
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    function deleteRow(id) {
+      alert("Delete row with ID: " + id);
+    }
+
+   
+    function createRow() {
+      alert("Create new row (You can open form here)");
+      }
+    loadData();
+  </script>
+  </body>
+</html>
