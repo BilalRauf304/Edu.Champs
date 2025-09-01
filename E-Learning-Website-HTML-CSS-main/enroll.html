@@ -115,9 +115,9 @@
         <div class="col-lg-6 col-md-8">
           <div class="card shadow border-0">
             <div class="card-body p-4">
-              <h3 class="text-center mb-4 text-primary">Enroll in a Course</h3>
+              <h3 class="text-center fs-1 mb-4 text-primary">Enroll Now</h3>
 
-              <form action="https://7t78lh3k-5000.inc1.devtunnels.ms/enroll" method="POST">
+              <form id="" action="https://7t78lh3k-5000.inc1.devtunnels.ms/enroll" method="POST">
                 <div class="mb-3">
                   <label for="fullName" class="form-label">Full Name</label>
                   <input type="text" name="name" class="form-control" id="name" placeholder="Enter your full name"
@@ -151,6 +151,8 @@
                   <label for="course" class="form-label">Select Course</label>
                   <select name="course" class="form-select" id="course">
                     <optgroup label="Islamic">
+                      <option value="Choose">Chose...</option>
+
                       <option value="QAIDA">QAIDA</option>
                       <option value="NAZRA_E_QURAN">NAZRA_E_QURAN</option>
                       <option value="HIFZ_E_QURAN">HIFZ_E_QURAN</option>
@@ -184,6 +186,19 @@
                     </optgroup>
                   </select>
                 </div>
+                 <div class="mb-3">
+                  <label for="study-plan" class="form-label">Select Your Study  Plan</label>
+                  <select name="study-plan" class="form-select" id="study-plan">
+                    <optgroup >
+                      <option value="choose....">Choose....</option>
+                      <option value="5-DAYS/WEEK">5-DAYS/WEEK </option>
+                      <option value="3-DAYS/WEEK">3-DAYS/WEEK</option>
+                      <option value="2-DAYS/WEEK">2-DAYS/WEEK</option>
+                      <option value="ONLY WEEKEND">ONLY WEEKEND</option>
+                      <option value=""></option>
+                      </optgroup>
+                    </select>
+                  </div>
                 <div class="mb-3">
                   <label for="message" class="form-label">Additional Notes</label>
                   <textarea type="text" class="form-control" name="message" id="message" rows="3"
@@ -197,7 +212,51 @@
           </div>
         </div>
       </div>
+      <div id="successMessage" style="display:none; color:green; font-size:18px; margin-top:20px;">
+  ✅ Form Submitted Successfully!<br>
+  Thank you for registering. We’ll contact you soon.
+    </div>
+    <script>
+  const form = document.getElementById("studentForm");
+  const successMsg = document.getElementById("successMessage");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault(); 
+    form.style.display = "none"; 
+    successMsg.style.display = "block"; 
+  });
+</script>
       <!-- </div> -->
+          <!-- whatsapp start -->
+    <a  href="https://wa.me/923208645326?text=Welcome%20To%20Edu.CHAMPS%20!%0A%0AThank%20you%20for%20connecting%20with%20us%20on%20WhatsApp.%20🚀%0AYou’re%20now%20part%20of%20our%20learning%20family!%20📚" 
+   target="_blank" style="
+     position: fixed;
+     bottom: 20px;
+     right: 20px;
+     z-index: 9999;
+     background-color: #25D366;
+     border-radius: 50%;
+     padding: 10px;
+     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+     margin-top: 13px;">
+        <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp"
+            style="width: 40px; height: 40px;" /> </a>
+    <!-- whatsapp end -->                   
+    <!-- email start -->
+   <a href="https://mail.google.com/mail/?view=cm&fs=1&to=educhamps001@gmail.com&su=Subscription&body=
+   Write Your Text!"
+    target="_blank" style="
+     position: fixed;
+     bottom: 80px;
+     right: 20px;
+     z-index: 9999;
+     background-color: #0072c6;
+     border-radius: 50%;
+     padding: 10px;
+     box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <img src="https://img.icons8.com/color/48/000000/apple-mail.png" alt="Email"
+            style="width: 40px; height: 40px; " /> </a>
+    <!-- email end -->
       <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.2/build/js/intlTelInput.min.js"></script>
       <script>
         const input = document.querySelector("#phone");
@@ -262,9 +321,11 @@
                                     <form action="#">
                                         <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="email"
                                             placeholder="Your email" required>
-                                        <button type="submit"
-                                            class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"><a
-                                                href="educhamps001@gmail.com">Subscribe</a></button>
+                                       <button type="button"
+                                            class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"
+                                            onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=educhamps001@gmail.com&su=Subscription&body=🎉 Welcome to EduChamps!%0A%0AThank you for subscribing. You are now part of our learning family. 🚀%0A%0AStay tuned for exciting updates and exclusive content!%0A%0A- EduChamps Team', '_blank')">
+                                            Subscribe
+                                        </button>
                                     </form>
                                 </div>
                             </div>

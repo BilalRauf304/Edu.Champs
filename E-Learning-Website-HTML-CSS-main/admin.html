@@ -18,7 +18,7 @@
         --sidebar-width: 260px;
       }
       body {
-        background: #f8f9fa;
+        background: powderblue;
       }
       .sidebar {
         width: var(--sidebar-width);
@@ -27,14 +27,14 @@
         left: 0;
         top: 0;
         padding-top: 1rem;
-        background: #fff;
+        background: #dadfdb;
         border-right: 1px solid #e9ecef;
       }
       .sidebar .nav-link {
         color: #495057;
       }
       .sidebar .nav-link.active {
-        background: #e7f1ff;
+        background: #f1f2f3;
         border-radius: 0.5rem;
         color: #0d6efd;
       }
@@ -62,8 +62,7 @@
     <!-- Sidebar -->
     <aside class="sidebar d-flex flex-column p-3">
       <a href="#" class="d-flex align-items-center mb-3 text-decoration-none">
-        <i class="bi bi-journal-bookmark-fill fs-3 text-primary"></i>
-        <span class="fs-4 ms-2">Edu.CHAMPS Admin</span>
+        <span class="fs-4 ms-2">Edu.CHAMPS </span>
       </a>
       <hr />
       <ul class="nav nav-pills flex-column mb-auto" id="navLinks">
@@ -81,7 +80,10 @@
           <a class="nav-link" href="teacher.html"
             ><i class="bi bi-person-badge me-2"></i>Instructors</a>         
         </li>
-       
+        <li class="nav-item">
+          <a class="nav-link" href="adminservices.html"
+            ><i class="bi bi-person-badge me-2"></i>Services</a>         
+        </li>
       </ul>
       <hr />
       <div class="mt-auto">
@@ -109,22 +111,13 @@
               <i class="bi bi-x"></i>
             </button>
           </div>
-          <!-- <button
-            class="btn btn-outline-secondary"
-            id="btnAddCourseMobile"
-            data-bs-toggle="modal"
-            data-bs-target="#courseModal"
-          >
-            <i class="bi bi-plus"></i> Add
-          </button> -->
           <div class="dropdown">
             <a
               class="btn btn-primary dropdown-toggle"
               href="#"
               role="button"
               data-bs-toggle="dropdown"
-              >Admin</a
-            >
+              >Admin</a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><hr class="dropdown-divider" /></li>
               <li>
@@ -139,8 +132,8 @@
       <div class="tab-content">
         <!-- Dashboard -->
         <div class="tab-pane fade show active" id="dashboard">
-          <div class="row g-3 mb-3">
-            <div class="col-12 col-md-6 col-lg-3">
+          <div class="row g-5 mb-3">
+            <div class="col-12 col-md-6 col-lg-4">
               <div class="card p-3 card-small">
                  <div class="d-flex justify-content-between align-items-center">
                   <div>
@@ -152,338 +145,81 @@
               </div>
             </div> 
 
-            <div class="col-12 col-md-6 col-lg-3">
+            <div class="col-12 col-md-6 col-lg-4">
               <div class="card p-3 card-small">
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <h6 class="mb-0">Total Students</h6>
-                    <h3 id="statStudents">0</h3>
+                    <h6 class="mb-0" >Total Students</h6>
+                    <h3 id="studentCount">0</h3>
                   </div>
                   <i class="bi bi-people fs-1 text-success"></i>
                 </div>
               </div>
             </div>
 
-            <div class="col-12 col-md-6 col-lg-3">
+            <div class="col-12 col-md-6 col-lg-4">
               <div class="card p-3 card-small">
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <h6 class="mb-0">Total Instructor</h6>
-                    <h3 id="statEnroll">0</h3>
+                    <h6 class="mb-0" >Total Instructor</h6>
+                    <h3 id="teacherCount">0</h3>
                   </div>
                   <i class="bi bi-journal-check fs-1 text-warning"></i>
                 </div>
               </div>
             </div>
 
-            <div class="col-12 col-md-6 col-lg-3">
-              <div class="card p-3 card-small">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h6 class="mb-0">Revenue (est.)</h6>
-                    <h3 id="statRevenue">$0</h3>
-                  </div>
-                  <i class="bi bi-currency-dollar fs-1 text-info"></i>
-                </div>
-              </div>
-            </div>
-          </div>
+                  <!-- <div class="col-12 col-md-6 col-lg-3">
+                   <div class="card p-3 card-small">
+                     <div class="d-flex justify-content-between align-items-center">
+                       <div>
+                         <h6 class="mb-0">Revenue (est.)</h6>
+                         <h3 id="statRevenue">$0</h3>
+                       </div>
+                       <i class="bi bi-currency-dollar fs-1 text-info"></i>
+                     </div>
+                   </div>
+                 </div> -->
+          </div> 
 
-          <!-- <div class="card mb-3">
-            <div class="card-body">
-              <h5 class="card-title">Recent Courses</h5>
-              <div class="table-responsive">
-                <table class="table table-hover" id="recentCoursesTable">
-                  <thead>
-                    <tr>
-                      <th>Title</th>
-                      <th>Category</th>
-                      <th>Students</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- Courses -->
-        <div class="tab-pane fade" id="courses">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="m-0">Courses</h4>
-            <div class="d-flex gap-2">
-              <button
-                class="btn btn-outline-secondary d-md-none"
-                id="toggleFilters"
-              >
-                Filters
-              </button>
-              <button
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#courseModal"
-              >
-                + Add Course
-              </button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="mb-3 d-flex gap-2 flex-column flex-md-row">
-                <input
-                  id="courseSearch"
-                  class="form-control"
-                  placeholder="Search courses by title or category"
-                />
-                <select
-                  id="filterCategory"
-                  class="form-select"
-                  style="max-width: 220px"
-                >
-                  <option value="">All categories</option>
-                </select>
-              </div>
-
-              <div class="table-responsive">
-                <table class="table table-striped" id="coursesTable">
-                  <thead>
-                    <tr>
-                      <th>Title</th>
-                      <th>Category</th>
-                      <th>Level</th>
-                      <th>Students</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Students -->
-        <div class="tab-pane fade" id="students">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="m-0">Students</h4>
-            <div>
-              <button
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#studentModal"
-              >
-                + Add Student
-              </button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="mb-3">
-                <input
-                  id="studentSearch"
-                  class="form-control"
-                  placeholder="Search students by name or email"
-                />
-              </div>
-              <div class="table-responsive">
-                <table class="table table-hover" id="studentsTable">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Courses</th>
-                      <th>Joined</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Instructors (simple list) -->
-        <div class="tab-pane fade" id="instructors">
-          <div class="card">
-            <div class="card-body">
-              <h4>Instructors</h4>
-              <p class="text-muted">
-                This demo keeps instructors minimal. You can extend CRUD
-                similarly to courses/students.
-              </p>
-              <ul id="instructorList" class="list-group"></ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Settings -->
-        <div class="tab-pane fade" id="settings">
-          <div class="card">
-            <div class="card-body">
-              <h4>Settings</h4>
-              <div class="mb-3">
-                <label class="form-label">Site name</label>
-                <input
-                  id="settingSiteName"
-                  class="form-control"
-                  placeholder="EduAdmin"
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Currency</label>
-                <input
-                  id="settingCurrency"
-                  class="form-control"
-                  placeholder="$"
-                />
-              </div>
-              <button class="btn btn-primary" id="saveSettings">Save</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <!-- Modals -->
-    <div class="modal fade" id="courseModal" tabindex="-1">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <form id="courseForm">
-            <div class="modal-header">
-              <h5 class="modal-title">Add / Edit Course</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <input type="hidden" id="courseId" />
-              <div class="row g-3">
-                <div class="col-md-8">
-                  <label class="form-label">Title</label>
-                  <input id="courseTitle" class="form-control" required />
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">Category</label>
-                  <input id="courseCategory" class="form-control" required />
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">Level</label>
-                  <select id="courseLevel" class="form-select">
-                    <option>Beginner</option>
-                    <option>Intermediate</option>
-                    <option>Advanced</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">Price</label>
-                  <input
-                    id="coursePrice"
-                    type="number"
-                    class="form-control"
-                    min="0"
-                    value="0"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">Students</label>
-                  <input
-                    id="courseStudents"
-                    type="number"
-                    class="form-control"
-                    min="0"
-                    value="0"
-                  />
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Short description</label>
-                  <textarea
-                    id="courseDesc"
-                    class="form-control"
-                    rows="3"
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Cancel
-              </button>
-              <button type="submit" class="btn btn-primary">Save Course</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="studentModal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <form id="studentForm">
-            <div class="modal-header">
-              <h5 class="modal-title">Add Student</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <input type="hidden" id="studentId" />
-              <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input id="studentName" class="form-control" required />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input
-                  id="studentEmail"
-                  type="email"
-                  class="form-control"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label"
-                  >Enrolled courses (comma separated IDs)</label
-                >
-                <input
-                  id="studentCourses"
-                  class="form-control"
-                  placeholder="1,2"
-                />
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Cancel
-              </button>
-              <button type="submit" class="btn btn-primary">
-                Save Student
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
+ 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+fetch("https://7t78lh3k-5000.inc1.devtunnels.ms/count_teachers")
+  .then(response => response.json())
+  .then(data => {
+    console.log("API Response:", data);
+    let totalTeachers = data.total_teachers;
+    // if (Array.isArray(data)) {
+    //   totalTeachers = data.length;
+    // } else if (data.count !== undefined) {
+    //   totalTeachers = data.count;
+    // }
+
+    document.getElementById('teacherCount').innerText = totalTeachers;
+  })
+  .catch(error => {
+    console.error('Fetch error:', error);
+    document.getElementById('teacherCount').innerText = 'Error';
+  });
+
+
+  
+  // student Api
+
+fetch("https://7t78lh3k-5000.inc1.devtunnels.ms/count_students")
+  .then(response => response.json())
+  .then(data => {
+    console.log("API Response:", data);  // <-- check this in browser console
+
+    let totalStudents = data.total_students;
+    document.getElementById('studentCount').innerText = totalStudents;
+  })
+  .catch(error => {
+    console.error('Fetch error:', error);
+    document.getElementById('studentCount').innerText = 'Error';
+  });
 
   </script>
   </body>

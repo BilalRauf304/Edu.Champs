@@ -43,6 +43,10 @@
       padding: 1.5rem;
     }
 
+    .card-small {
+      min-height: 90px;
+    }
+
     @media (max-width: 991px) {
       .sidebar {
         position: relative;
@@ -62,10 +66,10 @@
   <!-- Sidebar -->
   <aside class="sidebar d-flex flex-column p-3">
     <a href="#" class="d-flex align-items-center mb-3 text-decoration-none">
-      <span class="fs-4 ms-2">Edu.CHAMPS</span>
+      <span class="fs-4 ms-2">Edu.CHAMPS </span>
     </a>
     <hr />
-    <ul class="nav nav-pills flex-column mb-auto">
+    <ul class="nav nav-pills flex-column mb-auto" id="navLinks">
       <li class="nav-item">
         <a class="nav-link" href="admin.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
       </li>
@@ -73,10 +77,10 @@
         <a class="nav-link" href="adminstudents.html"><i class="bi bi-people me-2"></i>Students</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="teacher.html"><i class="bi bi-person-badge me-2"></i>Instructors</a>
+        <a class="nav-link" href="teacher.html"><i class="bi bi-person-badge me-2"></i>Instructors</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="adminservices.html"><i class="bi bi-briefcase me-2"></i>Services</a>
+        <a class="nav-link active" href="adminservices.html"><i class="bi bi-person-badge me-2"></i>Services</a>
       </li>
     </ul>
     <hr />
@@ -92,7 +96,7 @@
       <h3 class="m-0">Admin Dashboard</h3>
       <div class="d-flex align-items-center gap-3">
         <div class="input-group d-none d-md-flex" style="max-width: 320px">
-          <input id="globalSearch" class="form-control" placeholder="Search Instructors..." />
+          <input id="globalSearch" class="form-control" placeholder="Search Students..." />
           <button class="btn btn-outline-secondary" id="clearSearch" title="Clear">
             <i class="bi bi-x"></i>
           </button>
@@ -107,24 +111,20 @@
       </div>
     </div>
 
-    <!-- Instructors Table -->
+    <!-- Table -->
     <div class="card mb-3">
       <div class="card-body">
-        <h5 class="card-title">Instructors</h5>
+        <h5 class="card-title">Our Clients</h5>
         <div class="table-responsive">
           <table class="table table-bordered table-striped">
             <thead class="table-dark">
               <tr>
-                <th class="px-2">#</th>
-                <th class="px-2">First Name</th>
-                <th class="px-2">Last Name</th>
-                <th class="px-2">Email</th>
-                <th class="px-2">Contact</th>
-                <th class="px-2">Degree</th>
-                <th class="px-2">Subject</th>
-                <th class="px-2">Address</th>
-                <th class="px-2">Date</th>
-                <th class="px-2">Actions</th>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody id="dataTable"></tbody>
@@ -134,44 +134,34 @@
     </div>
   </main>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Load instructors
     async function loadData() {
       try {
-        let res = await fetch("https://7t78lh3k-5000.inc1.devtunnels.ms/teacher_data");
+        let res = await fetch("https://7t78lh3k-5000.inc1.devtunnels.ms/get_contact");
         let data = await res.json();
 
         let tableBody = document.getElementById("dataTable");
         tableBody.innerHTML = "";
 
         data.forEach((item, index) => {
-          // Format date (fallback if missing)
-          let appliedDate = item.applied_date
-            ? new Date(item.applied_date).toLocaleDateString()
-            : "—";
+          // Format date safely
+          let appliedDate = item.created_at
+            ? new Date(item.created_at).toLocaleDateString()
+            : new Date().toLocaleDateString();
 
           let row = `
             <tr>
               <td>${index + 1}</td>
-              <td>${item.fname || ""}</td>
-              <td>${item.lname || ""}</td>
+              <td>${item.name || ""}</td>
               <td>${item.email || ""}</td>
-              <td>${item.phone || ""}</td>
-              <td>${item.education || ""}</td>
-              <td>${item.subject || ""}</td>
-              <td>${item.address || ""}</td>
+              <td>${item.message || ""}</td>
               <td>${appliedDate}</td>
               <td>
-                <button class="btn btn-sm btn-danger me-1" onclick="deleteRow(${item.id})">
-                  <i class="bi bi-x"></i>
-                </button>
-                <button class="btn btn-sm btn-warning" onclick="editRow(${item.id})">
-                  <i class="bi bi-pencil-fill"></i>
-                </button>
+                <button class="btn btn-sm btn-outline-danger" onclick="deleteRow(${item.id})"><i class="bi bi-x"></i></button>
+                <button class="btn btn-sm btn-outline-primary" onclick="createRow()"><i class="bi bi-pencil-fill"></i></button>
               </td>
-            </tr>`;
+            </tr>
+          `;
           tableBody.innerHTML += row;
         });
       } catch (error) {
@@ -179,36 +169,18 @@
       }
     }
 
-    // Delete instructor
-    async function deleteRow(id) {
-      if (!confirm("Are you sure you want to delete ID: " + id + "?")) return;
-
-      try {
-        let res = await fetch(`https://7t78lh3k-5000.inc1.devtunnels.ms/delete_teacher/${id}`, {
-          method: "DELETE"
-        });
-
-        let data = await res.json();
-
-        if (res.ok) {
-          alert("✅ Deleted successfully!");
-          loadData();
-        } else {
-          alert("❌ Failed: " + (data.message || "Unknown error"));
-        }
-      } catch (err) {
-        console.error("Delete error:", err);
-        alert("❌ Network error: " + err.message);
-      }
+    function deleteRow(id) {
+      alert("Delete row with ID: " + id);
     }
 
-    // Edit row placeholder
-    function editRow(id) {
-      alert("Edit instructor with ID: " + id);
+    function createRow() {
+      alert("Create new row (You can open form here)");
     }
 
-    // Load on page ready
     loadData();
   </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
