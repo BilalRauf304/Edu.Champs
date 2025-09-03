@@ -1,367 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <head>
-    <meta charset="utf-8">
-    <meta name="google-translate-customization" content="9f841e7780177523-3214ceb76f765f38-gc38c6fe6f9d06436-c">
-    </meta>
-
-    <title>Edu.CHAMPS : Online Courses</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Favicon -->
-    <link href="img/icon.png" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
-      rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.2/build/css/intlTelInput.css">
-  </head>
-  <style>
-    .tabs ul li {
-      list-style-type: none;
-    }
-
-    .tabs ul li a {
-      font-size: 25px;
-      color: #4e4e4e !important;
-      font-weight: 500;
-    }
-
-    .tabs ul li a.active {
-      color: #f69050 !important;
-    }
-
-    .tabs ul li a:hover {
-      color: #f69050 !important;
-    }
-
-    #more {
-      display: none;
-    }
-
-    button {
-      border: none;
-      color: #f69050;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Enrollment</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Intl Tel Input CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
 </head>
+<body class="bg-light">
 
-<body>
-  <!-- Navbar Start -->
-  <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-      <p class="m-0  fw-bold" style="font-size: 28px ; "><img class="m-2  border-rounded" src="img/edu-logo.png" alt=""
-          height="58px"> <span style="color:#0a5778 ;"> Edu.</span><span style="color: #0298d8;">CHAMPS</span></p>
-    </a>
-    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <div class="navbar-nav ms-auto p-4 p-lg-0">
-        <a href="index.html" class="nav-item nav-link ">Home</a>
-        <a href="about.html" class="nav-item nav-link">About</a>
-        <a href="courses.html" class="nav-item nav-link">Courses</a>
-        <div class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-          <div class="dropdown-menu fade-down m-0">
-            <a href="team.html" class="dropdown-item">Our Team</a>
-            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow p-4">
+        <h3 class="mb-4 text-center">Enroll Form</h3>
 
-          </div>
-        </div>
-        <a href="blogs.html" class="nav-item nav-link">Blogs</a>
-        <a href="contact.html" class="nav-item nav-link">Contact</a>
-        <a href="login.html" class="nav-item nav-link"><i class="fa fa-user"></i></a>
-        <a href="#" class="nav-item nav-link">
-
-          <div id="google_translate_element">
+        <!-- Enrollment Form -->
+        <form id="enrollForm" action="https://7t78lh3k-5000.inc1.devtunnels.ms/enroll" method="POST" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Enter your full name" required>
+            <div class="invalid-feedback">Please enter your name.</div>
           </div>
 
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
+            <div class="invalid-feedback">Please enter a valid email.</div>
+          </div>
 
-        </a>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="number" name="phone" class="form-control" id="phone" placeholder="Enter phone number" required>
+            <div class="invalid-feedback">Please enter your phone number.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" name="address" class="form-control" id="address" placeholder="Enter your full address" required>
+            <div class="invalid-feedback">Please enter your address.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="course" class="form-label">Select Course</label>
+            <select name="course" class="form-select" id="course" required>
+              <option value="">Choose...</option>
+              <optgroup label="Islamic">
+                <option value="QAIDA">QAIDA</option>
+                <option value="NAZRA_E_QURAN">NAZRA_E_QURAN</option>
+                <option value="HIFZ_E_QURAN">HIFZ_E_QURAN</option>
+                <option value="TRANSLATION">TRANSLATION</option>
+              </optgroup>
+              <optgroup label="General Education">
+                <option value="GENERAL">GENERAL</option>
+                <option value="LANGUAGES">LANGUAGES</option>
+                <option value="MATHEMATICS">MATHEMATICS</option>
+                <option value="PHYSICS">PHYSICS</option>
+              </optgroup>
+              <optgroup label="Technology">
+                <option value="WEB_DEVELOPMENT">WEB_DEVELOPMENT</option>
+                <option value="APP_DEVELOPMENT">APP_DEVELOPMENT</option>
+                <option value="WORDPRESS">WORDPRESS</option>
+                <option value="ARTIFICIAL_INTELLIGENCE">ARTIFICIAL_INTELLIGENCE</option>
+                <option value="SEO">SEO</option>
+                <option value="E_COMMERCE">E_COMMERCE</option>
+                <option value="FREELANCING">FREELANCING</option>
+                <option value="DIGITAL_MARKETING">DIGITAL_MARKETING</option>
+              </optgroup>
+              <optgroup label="BioMedical">
+                <option value="DOCTOR_PHARMACY">DOCTOR_PHARMACY</option>
+                <option value="HUMAN_ANATOMY">HUMAN_ANATOMY</option>
+                <option value="BIO_CHEMISTRY">BIO_CHEMISTRY</option>
+                <option value="MICRO_BIOLOGY">MICRO_BIOLOGY</option>
+                <option value="GENETICS">GENETICS</option>
+                <option value="PHARMACOLOGY">PHARMACOLOGY</option>
+                <option value="BIOINFORMATICS">BIOINFORMATICS</option>
+                <option value="CELL_BIOLOGY">CELL_BIOLOGY</option>
+              </optgroup>
+            </select>
+            <div class="invalid-feedback">Please select a course.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="study_plan" class="form-label">Select Your Study Plan</label>
+            <select name="study-plan" class="form-select" id="study_plan" required>
+              <option value="">Choose...</option>
+              <option value="5-DAYS/WEEK">5-DAYS/WEEK</option>
+              <option value="3-DAYS/WEEK">3-DAYS/WEEK</option>
+              <option value="2-DAYS/WEEK">2-DAYS/WEEK</option>
+              <option value="ONLY_WEEKEND">ONLY WEEKEND</option>
+            </select>
+            <div class="invalid-feedback">Please select a study plan.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">Additional Notes</label>
+            <textarea name="message" class="form-control" id="message" rows="3" placeholder="Any special requests?"></textarea>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" id="submit-btn" class="btn btn-primary btn-lg">Apply Now</button>
+          </div>
+        </form>
       </div>
     </div>
-  </nav>
-  <!-- Navbar End -->
+  </div>
+</div>
 
-
-
-  <body class="bg-light">
-
-    <div class="container py-5">
-      <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
-          <div class="card shadow border-0">
-            <div class="card-body p-4">
-              <h3 class="text-center fs-1 mb-4 text-primary">Enroll Now</h3>
-
-              <form id="" action="https://7t78lh3k-5000.inc1.devtunnels.ms/enroll" method="POST">
-                <div class="mb-3">
-                  <label for="fullName" class="form-label">Full Name</label>
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Enter your full name"
-                    required>
-                </div>
-
-                <!-- Email -->
-                <div class="mb-3">
-                  <label for="enroll-email" id="enroll-eamil" class="form-label">Email Address</label>
-                  <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email"
-                    required>
-                </div>
-
-
-                <div class="mb-3">
-                  <label for="phone" id="#phone" class="form-label">Phone Number
-                  </label>
-                  <div class="input-group">
-
-                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter phone number"
-                      required>
-                  </div>
-                </div>
-                <!-- Address -->
-                <div class="mb-3">
-                  <label for="Address" class="form-label">Address</label>
-                  <input type="text" name="address" class="form-control" id="address"
-                    placeholder="Enter your Full Address" required>
-                </div>
-                <div class="mb-3">
-                  <label for="course" class="form-label">Select Course</label>
-                  <select name="course" class="form-select" id="course">
-                    <optgroup label="Islamic">
-                      <option value="Choose">Chose...</option>
-
-                      <option value="QAIDA">QAIDA</option>
-                      <option value="NAZRA_E_QURAN">NAZRA_E_QURAN</option>
-                      <option value="HIFZ_E_QURAN">HIFZ_E_QURAN</option>
-                      <option value="TRANSLATION">TRANSLATION</option>
-                    </optgroup>
-                    <optgroup label="General Education">
-                      <option value="GENERAL">GENERAL</option>
-                      <option value="LANGUAGES">LANGUAGES</option>
-                      <option value="MATHEMATICS">MATHEMATICS</option>
-                      <option value="PHYSICS">PHYSICS</option>
-                    </optgroup>
-                    <optgroup label="Technology">
-                      <option value="WEB_DEVELOPMENT">WEB_DEVELOPMENT</option>
-                      <option value="APP_DEVELOPMENT">APP_DEVELOPMENT</option>
-                      <option value="WORDPRESS">WORDPRESS</option>
-                      <option value="ARTIFICIAL_INTELLIGENCE">ARTIFICIAL_INTELLIGENCE</option>
-                      <option value="SEO">SEO</option>
-                      <option value="E_COMMERCE">E_COMMERCE</option>
-                      <option value="FREELANCING">FREELANCING</option>
-                      <option value="DIGITAL_MARKETING">DIGITAL_MARKETING</option>
-                      </optgroup>
-                    <optgroup label="BioMedical">
-                    <option value="DOCTOR_PHARMACY">DOCTOR_PHARMACY</option>
-                    <option value="HUMAN_ANATOMY">HUMAN_ANATOMY</option>
-                    <option value="BIO_CHEMISTRY">BIO_CHEMISTRY</option>          
-                    <option value="MICRO_BIOLOGY">MICRO_BIOLOGY</option>
-                    <option value="GENETICS">GENETICS</option>
-                    <option value="PHARMACOLOGY">PHARMACOLOGY</option>
-                    <option value="BIOINFORMATICS">BIOINFORMATICS</option>
-                    <option value="CELL_BIOLOGY">CELL_BIOLOGY</option>
-                    </optgroup>
-                  </select>
-                </div>
-                 <div class="mb-3">
-                  <label for="study-plan" class="form-label">Select Your Study  Plan</label>
-                  <select name="study-plan" class="form-select" id="study-plan">
-                    <optgroup >
-                      <option value="choose....">Choose....</option>
-                      <option value="5-DAYS/WEEK">5-DAYS/WEEK </option>
-                      <option value="3-DAYS/WEEK">3-DAYS/WEEK</option>
-                      <option value="2-DAYS/WEEK">2-DAYS/WEEK</option>
-                      <option value="ONLY WEEKEND">ONLY WEEKEND</option>
-                      <option value=""></option>
-                      </optgroup>
-                    </select>
-                  </div>
-                <div class="mb-3">
-                  <label for="message" class="form-label">Additional Notes</label>
-                  <textarea type="text" class="form-control" name="message" id="message" rows="3"
-                    placeholder="Any special requests?"></textarea>
-                </div>
-                <div class="d-grid">
-                  <button type="submit" id="submit-btn" class="btn btn-primary btn-lg">Apply Now</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="responseModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Submission Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-      <div id="successMessage" style="display:none; color:green; font-size:18px; margin-top:20px;">
-  ✅ Form Submitted Successfully!<br>
-  Thank you for registering. We’ll contact you soon.
+      <div class="modal-body text-center" id="responseMessage"></div>
     </div>
-    <script>
-  const form = document.getElementById("studentForm");
-  const successMsg = document.getElementById("successMessage");
+  </div>
+</div>
 
-  form.addEventListener("submit", function(e) {
-    e.preventDefault(); 
-    form.style.display = "none"; 
-    successMsg.style.display = "block"; 
+<!-- Bootstrap JS + Intl Tel Input -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
+
+<script>
+  const form = document.getElementById("enrollForm");
+  const phoneInput = document.querySelector("#phone");
+  const responseMessage = document.getElementById("responseMessage");
+  const modal = new bootstrap.Modal(document.getElementById("responseModal"));
+
+  // Initialize intl-tel-input
+  // const iti = window.intlTelInput(phoneInput, {
+  //   initialCountry: "",
+  //   utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+  // });
+  //  Initialize intl-tel-input with Search Bar
+const iti = window.intlTelInput(phoneInput, {
+  initialCountry: "",           // default Pakistan
+  separateDialCode: true,         // dial code alag show hoga
+  nationalMode: false,            // full international number allow karega
+  preferredCountries: ["pk", "in", "us", "gb", "ae"], // top par dikhne wale
+  allowDropdown: true,            // dropdown on
+  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+});
+
+
+  //  Handle form submit
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      e.stopPropagation();
+      form.classList.add("was-validated");
+      return;
+    }
+
+    const formData = new FormData(form);
+    formData.set("phone", iti.getNumber()); // Intl formatted phone
+
+    try {
+      const res = await fetch(form.action, { method: "POST", body: formData });
+
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        data = { message: await res.text() };
+      }
+
+      if (res.ok) {
+        responseMessage.innerHTML = `<p class="text-success fw-bold"> ${data.message || "Form submitted successfully!"}</p>`;
+        form.reset();
+        form.classList.remove("was-validated");
+      } else {
+        responseMessage.innerHTML = `<p class="text-danger fw-bold"> ${data.message || "Something went wrong!"}</p>`;
+      }
+    } catch (err) {
+      responseMessage.innerHTML = `<p class="text-danger fw-bold"> Network Error: ${err.message}</p>`;
+    }
+
+    modal.show();
   });
 </script>
-      <!-- </div> -->
-          <!-- whatsapp start -->
-    <a  href="https://wa.me/923208645326?text=Welcome%20To%20Edu.CHAMPS%20!%0A%0AThank%20you%20for%20connecting%20with%20us%20on%20WhatsApp.%20🚀%0AYou’re%20now%20part%20of%20our%20learning%20family!%20📚" 
-   target="_blank" style="
-     position: fixed;
-     bottom: 20px;
-     right: 20px;
-     z-index: 9999;
-     background-color: #25D366;
-     border-radius: 50%;
-     padding: 10px;
-     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-     margin-top: 13px;">
-        <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp"
-            style="width: 40px; height: 40px;" /> </a>
-    <!-- whatsapp end -->                   
-    <!-- email start -->
-   <a href="https://mail.google.com/mail/?view=cm&fs=1&to=educhamps001@gmail.com&su=Subscription&body=
-   Write Your Text!"
-    target="_blank" style="
-     position: fixed;
-     bottom: 80px;
-     right: 20px;
-     z-index: 9999;
-     background-color: #0072c6;
-     border-radius: 50%;
-     padding: 10px;
-     box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-        <img src="https://img.icons8.com/color/48/000000/apple-mail.png" alt="Email"
-            style="width: 40px; height: 40px; " /> </a>
-    <!-- email end -->
-      <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.2/build/js/intlTelInput.min.js"></script>
-      <script>
-        const input = document.querySelector("#phone");
-        window.intlTelInput(input, {
-          loadUtils: () => import("https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.2/build/js/utils.js"),
-          
-        });
-        console.log(input);
-        const emails = document.getElementById('email')
-
-        function validateEmail(email) {
-          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return re.test(String(emails).toLowerCase());
-        }
-
-        emails.addEventListener('input', () => {
-          if (validateEmail(emailInput.value.trim())) {
-            emails.classList.remove('is-invalid');
-            emails.classList.add('is-valid');
-          } else {
-            emails.classList.remove('is-valid');
-            emails.classList.add('is-invalid');
-          }
-        });
-      </script>
-      <!-- Bootstrap JS -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Footer Start -->
-                <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="container py-5">
-                        <div class="row g-5">
-                            <div class="col-lg-4 col-md-6">
-                                <h4 class="text-white mb-3">Quick Link</h4>
-                                <p><a class="text-light" href="about.html">About Us</a></p>
-                                <p><a class="text-light" href="contact.html">Contact Us</a></p>
-                                <p><a class="text-light" href="privacy.html">Privacy Policy</a></p>
-                                <p><a class="text-light" href="terms&conditon.html">Terms & Condition</a></p>
-                                <p><a class="text-light" href="faqs@.html">FAQs & Help</a></p>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <h4 class="text-white mb-3">Contact</h4>
-                                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Islamabad,
-                                    Pakistan</p>
-                                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+92 341 9661 304</p>
-                                <p class="mb-2"><i class="fa fa-envelope me-3"></i>educhamps001@gmail.com</p>
-                                <div class="d-flex pt-2 gap-2">
-                                    <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/educhamps001?igsh=Y2tmMmk3NHh4emlx">
-                                        <i class="bi bi-instagram"></i></a>
-                                    <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/profile.php?id=61578275804814"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/in/edu-champs-ltd-a8880637b/"><i
-                                            class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6">
-                                <h4 class="text-white mb-3">Subscribe to our Newsletter</h4>
-                                <p>Subscribe now and join our growing community of learners committed to lifelong
-                                    education! </p>
-                                <div class="position-relative mx-auto" style="max-width: 400px;">
-                                    <form action="#">
-                                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="email"
-                                            placeholder="Your email" required>
-                                       <button type="button"
-                                            class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"
-                                            onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=educhamps001@gmail.com&su=Subscription&body=🎉 Welcome to EduChamps!%0A%0AThank you for subscribing. You are now part of our learning family. 🚀%0A%0AStay tuned for exciting updates and exclusive content!%0A%0A- EduChamps Team', '_blank')">
-                                            Subscribe
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="copyright">
-                            <div class="row">
-                                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                                    &copy; <a class="border-bottom" href="index.html">Edu.CHAMPS</a>, All Right
-                                    Reserved.
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Footer End -->
-
-      <!-- Back to Top -->
-      <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-      <!-- JavaScript Libraries -->
-      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="lib/wow/wow.min.js"></script>
-      <script src="lib/easing/easing.min.js"></script>
-      <script src="lib/waypoints/waypoints.min.js"></script>
-      <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-      <!-- Template Javascript -->
-      <script src="js/main.js"></script>
-
-
-      <!-- Bootstrap JS -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-
+</body>
 </html>

@@ -148,9 +148,7 @@
 
         data.forEach((item, index) => {
           // Format date (fallback if missing)
-          let appliedDate = item.applied_date
-            ? new Date(item.applied_date).toLocaleDateString()
-            : "—";
+           let appliedDate = item.date ? new Date(item.date).toLocaleDateString() : new Date().toLocaleDateString();
 
           let row = `
             <tr>
